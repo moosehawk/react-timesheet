@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:4200',
+    'webpack-dev-server/client?http://localhost:4500',
     'webpack/hot/only-dev-server',
     './index.js'
   ],
@@ -16,14 +16,15 @@ module.exports = {
     publicPath: '/'
   },
 
-  context: resolve(__dirname, 'src'),
+  context: resolve(__dirname, '../src'),
 
   devtool: 'inline-source-map',
 
   devServer: {
     hot: true,
     contentBase: resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: true
   },
 
   module: {
@@ -31,7 +32,7 @@ module.exports = {
       {
         test: /\.js$/,
         use: [
-          'babel-loader',
+          'babel-loader'
         ],
         exclude: /node_modules/
       },
@@ -40,20 +41,20 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader?modules',
-          'postcss-loader',
-        ],
-      },
-    ],
+          'postcss-loader'
+        ]
+      }
+    ]
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
       filename: 'index.html',
-      favicon: resolve(__dirname, 'public/favicon.ico'),
-      template: resolve(__dirname, 'public/index.html')
+      favicon: resolve(__dirname, '../public/favicon.ico'),
+      template: resolve(__dirname, '../public/index.html')
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ],
+    new webpack.NamedModulesPlugin()
+  ]
 }

@@ -6,13 +6,17 @@ export class App extends Component {
     return (
       <div className={styles.app}>
         <h2>Hello, OPI</h2>
+        {this.props.children}
       </div>
     )
   }
 }
 
-App.PropTypes = {
-  children: PropTypes.object
+App.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(React.PropTypes.node),
+    PropTypes.node
+  ])
 }
 
 export default App
